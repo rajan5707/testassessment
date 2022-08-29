@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import {
+        FormBuilder,
+        FormGroup,
+        FormControl,
+        Validators
+} from '@angular/forms';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,17 +13,26 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppComponent implements OnInit {
 title = 'first';
-totalAngularPackages:any;
-	constructor(private http: HttpClient,) { }
+loginForm = this.formBuilder.group({
+    username: '',
+    password: ''
+  });
+
+  //totalAngularPackages:any;
+	constructor(private http: HttpClient, private formBuilder: FormBuilder) { }
 	ngOnInit() {
 		var routeUrl = window.location.href
 		var url = routeUrl.slice(0,-5)
 		console.log("launching url > ",url)
-			this.http.get(url +"5000/write").subscribe(data => {
+			this.http.get("http://13.232.124.37:5000/write").subscribe(data => {
 			console.log(" written data",data)
      			})
-			this.http.get(url+"5000/read").subscribe(data => {
+			this.http.get("http://13.232.124.37:5000/read").subscribe(data => {
 			console.log("read data >> ",data)
    			})
-   		}
+		}
+	onSubmit(){
+        	console.log("??????????????????????????????????",this.loginForm.value)
+  	}
+
    }

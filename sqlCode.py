@@ -52,6 +52,7 @@ def create_table():
 
 
 def writeData (params):
+    create_table()
     conn = create_connection()
     if conn is not None:
         c = conn.cursor()
